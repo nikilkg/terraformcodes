@@ -1,15 +1,18 @@
+
+# RSA key of size 4096 bits
+resource "tls_private_key" "rsa" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+# create public key
+
 resource "aws_key_pair" "tf_key" {
     key_name   = "tfkey"
     public_key = tls_private_key.rsa.public_key_openssh
     tags = {
         managed_by = "terraform-managed"
         }
-}
-
-# RSA key of size 4096 bits
-resource "tls_private_key" "rsa" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
 }
 
 # create local file to store private key
