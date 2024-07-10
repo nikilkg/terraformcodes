@@ -8,7 +8,7 @@ resource "tls_private_key" "rsa" {
 # create public key
 
 resource "aws_key_pair" "tf_key" {
-    key_name   = "tfkey"
+    key_name   = "tf-key-01"
     public_key = tls_private_key.rsa.public_key_openssh
     tags = {
         managed_by = "terraform-managed"
@@ -18,5 +18,5 @@ resource "aws_key_pair" "tf_key" {
 # create local file to store private key
 resource "local_file" "tf-key-local" {
   content = tls_private_key.rsa.private_key_pem
-  filename = "tfkey"
+  filename = "tf-key-01"
 }
